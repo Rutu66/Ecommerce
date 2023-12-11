@@ -1,18 +1,17 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
+
 <!doctype html>
 <html lang="en">
 
 
-<!-- Mirrored from demo.w3layouts.com/demos_new/template_demo/07-12-2021/shoppykart-liberty-demo_Free/1589417704/web/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Dec 2022 10:07:35 GMT -->
+<!-- Mirrored from demo.w3layouts.com/demos_new/template_demo/07-12-2021/shoppykart-liberty-demo_Free/1589417704/web/checkout.php by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Dec 2022 10:07:35 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ShoppyKart - Ecommerce Category Bootstrap Responsive Template | Checkout :: W3layouts </title>
+    <title>
+    AC Buy & Service
+    </title>
     <!-- google fonts -->
     <link href="http://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&amp;display=swap" rel="stylesheet">
     <!-- Template CSS -->
@@ -56,7 +55,7 @@ if(typeof _bsa !== 'undefined' && _bsa) {
 </script>
 
 <meta name="robots" content="noindex">
-<body><link rel="stylesheet" href="../../../../../../static/css/font-awesome.min.css">
+<body><link rel="stylesheet" href="../../../../../../assests/css/font-awesome.min.css">
 <!-- New toolbar-->
 <style>
 * {
@@ -201,7 +200,7 @@ RIGHT SIDEBAR TOGGLE SECTION
 
 
     <!--/Header-->
-    {% include "header.html" %}
+    {% include 'header.html' %}
     <!--//Header-->
     <section class="w3mid-gap"></section>
     <!--/Banner-Start-->
@@ -212,12 +211,12 @@ RIGHT SIDEBAR TOGGLE SECTION
                 <div class="w3breadcrumb-gids">
                     <div class="w3breadcrumb-left text-left">
                         <h2 class="inner-w3-title">
-                            Products </h2>
+                            Your Orders </h2>
                     </div>
                     <div class="w3breadcrumb-right">
                         <ul class="breadcrumbs-custom-path">
-                            <li><a href="/shop/">Home</a></li>
-                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> Products </li>
+                            <li><a href="index.html">Home</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> Your Orders </li>
                         </ul>
                     </div>
                 </div>
@@ -240,114 +239,41 @@ RIGHT SIDEBAR TOGGLE SECTION
             <div class="container py-lg-5">
                 <!-- about -->
                 <div class="ecom-contenthny-w3lcheckout privacy">
-                    <h3>Chec<span>kout</span></h3>
+                    
                     <div class="checkout-right">
-                        {% if cart %}
-                        <p class="mb-5">Your shopping cart contains: <span>{{ cart|length }} Products</span></p>
-                        {% endif %}
+                        
+                  
                         <table class="timetable_sub">
                             <thead>
-                                <tr> 
+                                <tr>
                                     <th>SL No.</th>
-                                    <th>Product</th>
-                                    <th>Quality</th>
-                                    <th>Product Name</th>
-
-                                    <th>Price</th>
-                                    <th>Remove</th>
+                                    <th>Order</th>
+                                    
+                                    <th>quantity</th>
+                                   
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for i in cart %}
+                              
+                                {% for i in order_obj %}
                                 <tr class="rem1">
-                                    <td class="invert">{{forloop.counter}}</td>
-                                    <td class="invert-image"><a href="/shop/product-single/">
-                                            <img src="{{i.product.image.url}}" class="img-fluid radius-image" alt=""></a></td>
-                                    <td class="invert">
-                                        <div class="quantity">
-                                            <div class="quantity-select">
-                                               <a href="{% url 'remove_quantity' i.id %}"><button>-</button></a>
-                                                <div class="entry value"><span>{{ i.quantity }}</span></div>
-                                               <a href="{% url 'update_quantity' i.id %}"><button>+</button></a>
-                                                
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="invert">{{i.product.product_name}}</td>
-
-                                    <td class="invert">{{i.product.price}}</td>
-                                    <td class="invert">
-                                        <div class="rem">
-                                            <a href="{% url 'delete_cart' i.id %}"> <i class="far fa-window-close"></i></a>
-                                        </div>
-
-                                    </td>
+                                  <td>{{ forloop.counter }}</td>
+                                  <td>{{ i.product.product_name }}</td>
+                                  
+                                  <td>{{ i.quantity }}</td>
                                 </tr>
                                 {% endfor %}
-
+                                
                             </tbody>
                         </table>
+                        
+                        
+                          
                     </div>
-
                     <div class="row checkout-left mt-5">
-
-                        <div class="col-md-4 checkout-left-basket">
-                            <h4>Continue to basket</h4>
-                            <ul>
-                                {% for i in cart %}
-                                <li>{{ forloop.counter }}. {{ i.product.product_name }} <i>-</i> <span>{{ i.product.price}} </span></li>
-                                {% endfor %}
-                                <li>Total <i>-</i> <span>{{ total }}</span></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-8 address_form_agile ps-lg-5">
-                            <h4>Add a new Details</h4>
-                            <form action="{% url 'orderplace' %}" method="post" class="creditly-card-form agileinfo_form mt-4">
-                                {% csrf_token %}
-                                <section class="creditly-wrapper wthree, w3_agileits_wrapper">
-                                    <div class="information-wrapper">
-                                        <div class="first-row form-group">
-                                            <div class="controls">
-
-                                                <input class="billing-address-name form-control" type="text" name="name" placeholder="Full name">
-                                            </div>
-                                            <div class="w3_agileits_card_number_grids">
-                                                <div class="w3_agileits_card_number_grid_left">
-                                                    <div class="controls">
-
-                                                        <input class="form-control" type="text" placeholder="Mobile number">
-                                                    </div>
-                                                </div>
-                                                <div class="w3_agileits_card_number_grid_right">
-                                                    <div class="controls">
-
-                                                        <input class="form-control" type="text" placeholder="Landmark">
-                                                    </div>
-                                                </div>
-                                                <div class="clear"> </div>
-                                            </div>
-                                            <div class="controls">
-
-                                                <input class="form-control" type="text" placeholder="Town/City">
-                                            </div>
-                                            <div class="controls">
-
-                                                <select class="form-control option-w3ls">
-                                                    <option>Office</option>
-                                                    <option>Home</option>
-                                                    <option>Commercial</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        {% comment %} <button class="submit check_out btn btn-style btn-primary">Delivery to this Address</button> {% endcomment %}
-                                    </div>
-                                </section>
-                                <div class="checkout-right-basket">
-                                    <button type="submit" class="submit check_out btn btn-style btn-primary">Confirm</button>
-                                </div>
-                            </form>
-                            
+                        
+                        
                         </div>
                     </div>
                 </div>
@@ -362,12 +288,13 @@ RIGHT SIDEBAR TOGGLE SECTION
  
 </div>
     <!--/w3l-footer-29-main-->
-    {% include "footer.html" %}
+ 
+    <!-- end footer  -->
     <!-- Template JavaScript -->
-    <script src="/static/js/jquery-3.3.1.min.js"></script>
-    <script src="/static/js/theme-change.js"></script>
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/theme-change.js"></script>
     <!-- js -->
-    <script src="/static/js/jquery-1.11.1.min.js"></script>
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
     <!--quantity-->
     <script>
@@ -418,7 +345,7 @@ RIGHT SIDEBAR TOGGLE SECTION
 
     <!-- //js -->
     <!-- cart-js -->
-    <script src="/static/js/minicart.js"></script>
+    <script src="assets/js/minicart.js"></script>
     <script>
         shopv.render();
 
@@ -476,11 +403,12 @@ RIGHT SIDEBAR TOGGLE SECTION
     <!-- //disable body scroll which navbar is in active -->
 
     <!-- //bootstrap -->
-    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 
 
 </body>
 
 
-<!-- Mirrored from demo.w3layouts.com/demos_new/template_demo/07-12-2021/shoppykart-liberty-demo_Free/1589417704/web/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Dec 2022 10:07:38 GMT -->
+<!-- Mirrored from demo.w3layouts.com/demos_new/template_demo/07-12-2021/shoppykart-liberty-demo_Free/1589417704/web/checkout.php by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Dec 2022 10:07:38 GMT -->
 </html>
+{% include 'footer.html' %}

@@ -20,7 +20,7 @@ from .import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('about/', views.about),
-    path('products/', views.products),
+    path('products/', views.products,name='product'),
     path('checkout/', views.checkout,name='checkout'),
     path('product-single/<int:pid>/', views.productsingle,name='productsingle'),
     path('add_to_cart/<int:pid>/', views.add_to_cart,name='add_to_cart'),
@@ -29,7 +29,8 @@ urlpatterns = [
     path('delete_cart/<int:cart_id>/', views.delete_cart,name='delete_cart'),
     
     path('buy_now/<int:pid>/', views.buy_now,name='buy_now'),
-    path('payment/', views.payment),
+    path('order_place/', views.order_place,name='orderplace'),
+    path('orders/', views.orders, name="orders"),
     path('contact/', views.contact),
     path('login/', views.login,name='login'),
     path('logout/', views.user_logout,name='logout')

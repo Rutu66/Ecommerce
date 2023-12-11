@@ -90,6 +90,21 @@ def delete_cart(request, cart_id):
     carts.delete()
     return redirect('checkout')
 
+def order_place(request):
+    carts = cart.objects.filter(user=request.user)
+    for i in carts:
+        order.objects.create(user=request.user,product=i.product, quantity = i.quantity)
+    carts.delete()
+    return redirect('index')
+    
+
+def orders(request):
+    order_obj = order.objects.filter(user=request.user)
+    
+    
+    return render(request, 'order.html',locals())
+    
+
 
 def login(request):
     
